@@ -3,7 +3,9 @@ import React from 'react';
 export default class Header extends React.Component {
   render() {
     return (
-      <h1>Wicked Sales</h1>
+      <header className="header">
+        <div className="pt-3 header-text">$Wicked Sales</div>
+      </header>
     );
   }
 }
