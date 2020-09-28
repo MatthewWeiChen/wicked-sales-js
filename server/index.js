@@ -36,7 +36,8 @@ app.get('/api/products/:productId', (req, res, next) => {
     "name",
     "price",
     "image",
-    "shortDescription"
+    "shortDescription",
+    "longDescription"
     from "products"
     where "productId" = $1
   `;
