@@ -22,8 +22,38 @@ app.get('/api/products', (req, res, next) => {
     "shortDescription"
     from "products"
   `;
+
   db.query(sql)
     .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.get('/api/products/:productId', (req, res, next) => {
+  const productId = parseInt(req.params.productId, 10);
+
+  const sql = `
+    select "productId",
+    "name",
+    "price",
+    "image",
+    "shortDescription"
+    from "products"
+    where "productId" = $1
+  `;
+
+  const params = [productId];
+
+  db.query(sql, params)
+    .then(result => {
+      const product = result.rows[0];
+      if (!product) {
+        res.status(404).json({
+          error: `Cannot find product with productId ${productId}`
+        });
+      } else {
+        res.status(200).json(product);
+      }
+    })
     .catch(err => next(err));
 });
 
