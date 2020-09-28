@@ -8,6 +8,7 @@ export default class ProductList extends React.Component {
       products: []
     };
     this.getProducts = this.getProducts.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   getProducts() {
@@ -16,6 +17,10 @@ export default class ProductList extends React.Component {
       .then(data => this.setState({
         products: this.state.products.concat(data)
       }));
+  }
+
+  handleClick(props) {
+    this.props.onClick('detail', { productId: props });
   }
 
   componentDidMount() {
@@ -34,7 +39,8 @@ export default class ProductList extends React.Component {
                 text={product.shortDescription}
                 name={product.name}
                 price={product.price}
-                key={index} />
+                id={product.productId}
+                onClick={() => this.handleClick(product.productId)} />
             </div>
           ))};
         </div>
