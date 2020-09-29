@@ -7,6 +7,7 @@ export default class ProductDetails extends React.Component {
       product: null
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleAddClick = this.handleAddClick.bind(this);
   }
 
   componentDidMount() {
@@ -19,6 +20,10 @@ export default class ProductDetails extends React.Component {
 
   handleClick() {
     this.props.onClick('catalog', {});
+  }
+
+  handleAddClick() {
+    this.props.addToCart(this.props.view);
   }
 
   render() {
@@ -39,6 +44,7 @@ export default class ProductDetails extends React.Component {
               <div className="price-color">{'$' + (product.price / 100).toFixed(2)}</div>
               <hr></hr>
               <p>{product.shortDescription}</p>
+              <button className="btn btn-primary" onClick={this.handleAddClick}>Add to Cart</button>
             </div>
           </div>
           <div className="row">

@@ -21,7 +21,7 @@ body{
 }
 
 .header-text{
-  margin-left: 200px;
+  margin-left: 100px;
 }
 
 .details{
@@ -35,4 +35,8 @@ body{
 
 .paragraph-spacing{
   padding: 10px;
+}
+
+.shopping-cart{
+  text-align: left;
 }
