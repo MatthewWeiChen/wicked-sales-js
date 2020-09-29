@@ -48,9 +48,7 @@ app.get('/api/products/:productId', (req, res, next) => {
     .then(result => {
       const product = result.rows[0];
       if (!product) {
-        res.status(404).json({
-          error: `Cannot find product with productId ${productId}`
-        });
+        throw (new ClientError(`cannot find product with ${productId}`, 400));
       } else {
         res.status(200).json(product);
       }
@@ -60,7 +58,7 @@ app.get('/api/products/:productId', (req, res, next) => {
 
 app.get('/api/cart', (req, res, next) => {
   if (!req.session.cartId) {
-    res.json({});
+    res.json([]);
   } else {
     const sql = `
     select "c"."cartItemId",
@@ -79,7 +77,7 @@ app.get('/api/cart', (req, res, next) => {
     db.query(sql, params)
       .then(result => {
         const cart = result.rows;
-        res.status(200).json({ cart });
+        res.status(200).json(cart);
       });
   }
 
@@ -89,7 +87,7 @@ app.post('/api/cart', (req, res, next) => {
   const productId = parseInt(req.body.productId, 10);
   const cartOfPerson = req.session.cartId;
   if (productId < 0) {
-    res.status(400).json({
+    return res.status(400).json({
       error: 'productId must be a postive integer'
     });
   }
@@ -105,10 +103,9 @@ app.post('/api/cart', (req, res, next) => {
     .then(result => {
       const productPrice = result.rows[0];
       if (!productPrice) {
-        throw res.status(400).json({
-          error: 'No results found'
-        });
+        throw (new ClientError(`cannot find product with ${productId}`, 400));
       }
+
       if (!req.session.cartId) {
         const sql = `
         insert into "carts" ("cartId","createdAt")
@@ -119,21 +116,21 @@ app.post('/api/cart', (req, res, next) => {
           .then(result => result.rows)
           .then(result => {
             return {
-              productPrice,
-              result
+              price: productPrice.price,
+              cartId: result
             };
           });
       }
       return {
-        productPrice,
-        cartOfPerson
+        price: productPrice.price,
+        cartId: cartOfPerson
       };
     })
     .then(result => {
       if (cartOfPerson !== req.session.cartId) {
         req.session.cartId = result.result[0].cartId;
       }
-      const price = result.productPrice.price;
+      const price = result.price;
       const sql = `
       insert into "cartItems" ("cartId","productId", "price")
       values ($1, $2, $3)
@@ -163,7 +160,7 @@ app.post('/api/cart', (req, res, next) => {
 
       const params = [result.rows[0].cartItemId];
 
-      db.query(sql, params)
+      return db.query(sql, params)
         .then(result => {
           const cartItem = result.rows[0];
           res.status(201).json({ cartItem });
@@ -171,10 +168,7 @@ app.post('/api/cart', (req, res, next) => {
     })
 
     .catch(err => {
-      console.error(err);
-      res.status(500).json({
-        error: 'An unexpected error ocurred'
-      });
+      next(err);
     });
 });
 
