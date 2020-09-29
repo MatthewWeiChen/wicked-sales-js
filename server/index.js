@@ -58,6 +58,57 @@ app.get('/api/products/:productId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/cart', (req, res, next) => {
+  res.json({});
+});
+
+app.post('/api/cart', (req, res, next) => {
+  const productId = parseInt(req.body.productId, 10);
+  if (productId < 0) {
+    res.status(400).json({
+      error: 'productId must be a postive integer'
+    });
+  }
+
+  const sql = `
+    select "price"
+    from "products"
+    where "productId" = $1
+  `;
+
+  const params = [productId];
+  db.query(sql, params)
+    .then(result => {
+      const productPrice = result.rows[0];
+      if (!productPrice) {
+        res.status(400).json({
+          error: 'No results found'
+        });
+      }
+      const sql = `
+      insert into "carts" ("cartId","createdAt")
+      values(default, default)
+      returning "cartId"
+      `;
+      db.query(sql)
+        .then(result => {
+          const cartId = result.rows;
+          return {
+            cartId,
+            productPrice
+          };
+        });
+
+    })
+
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'An unexpected error ocurred'
+      });
+    });
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
