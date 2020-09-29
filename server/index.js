@@ -117,18 +117,19 @@ app.post('/api/cart', (req, res, next) => {
           .then(result => {
             return {
               price: productPrice.price,
-              cartId: result
+              cartId: result[0].cartId
             };
           });
+      } else {
+        return {
+          price: productPrice.price,
+          cartId: cartOfPerson
+        };
       }
-      return {
-        price: productPrice.price,
-        cartId: cartOfPerson
-      };
     })
     .then(result => {
-      if (cartOfPerson !== req.session.cartId) {
-        req.session.cartId = result.result[0].cartId;
+      if (!cartOfPerson) {
+        req.session.cartId = result.cartId;
       }
       const price = result.price;
       const sql = `
@@ -137,7 +138,7 @@ app.post('/api/cart', (req, res, next) => {
       returning "cartItemId"
       `;
 
-      const params = [cartOfPerson, productId, price];
+      const params = [req.session.cartId, productId, price];
       return db.query(sql, params)
         .then(result => {
           const cart = result;
