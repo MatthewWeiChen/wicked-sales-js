@@ -173,6 +173,36 @@ app.post('/api/cart', (req, res, next) => {
     });
 });
 
+app.post('/api/orders', (req, res, next) => {
+  const customerName = req.body.name;
+  const customerCard = req.body.creditCard;
+  const customerAddress = req.body.shippingAddress;
+  const cartId = req.session.cartId;
+  if (!cartId) {
+    throw new ClientError(`There is no cart with ${req.session.cartId}`, 400);
+  }
+
+  if (!customerCard || !customerName || !customerAddress) {
+    throw new ClientError('Missing requirements', 400);
+  }
+
+  const sql = `
+  insert into "orders" ("cartId", "name", "creditCard", "shippingAddress")
+  values ($1, $2, $3, $4)
+  returning *
+  `;
+
+  const params = [cartId, customerName, customerCard, customerAddress];
+
+  return db.query(sql, params)
+    .then(result => {
+      const order = result.rows[0];
+      delete result.rows[0].cartId;
+      res.status(201).json(order);
+    });
+
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
