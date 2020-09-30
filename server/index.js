@@ -197,7 +197,7 @@ app.post('/api/orders', (req, res, next) => {
   return db.query(sql, params)
     .then(result => {
       const order = result.rows[0];
-      delete result.rows[0].cartId;
+      delete req.session.cartId;
       res.status(201).json(order);
     });
 
