@@ -40,3 +40,7 @@ body{
 .shopping-cart{
   text-align: left;
 }
+
+.empty-cart{
+  text-align:center;
+}
