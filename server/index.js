@@ -179,7 +179,7 @@ app.post('/api/orders', (req, res, next) => {
   const customerAddress = req.body.shippingAddress;
   const cartId = req.session.cartId;
   if (!cartId) {
-    throw new ClientError(`There is no cart with ${req.session.cartId}`, 400);
+    throw new ClientError('There is no cart for this customer', 400);
   }
 
   if (!customerCard || !customerName || !customerAddress) {
