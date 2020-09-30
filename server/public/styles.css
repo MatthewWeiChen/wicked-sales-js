@@ -1,5 +1,5 @@
 body{
-  background-color: rgb(245, 244, 244);
+  background-color: rgb(255, 255, 255);
 }
 
 .header{
@@ -43,4 +43,13 @@ body{
 
 .empty-cart{
   text-align:center;
+}
+
+.address{
+  resize:none;
+}
+
+.checkout-button{
+  width: 120px;
+  margin-right: 60px;
 }
