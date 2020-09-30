@@ -164,7 +164,7 @@ app.post('/api/cart', (req, res, next) => {
       return db.query(sql, params)
         .then(result => {
           const cartItem = result.rows[0];
-          res.status(201).json({ cartItem });
+          res.status(201).json(cartItem);
         });
     })
 
@@ -192,12 +192,13 @@ app.post('/api/orders', (req, res, next) => {
   returning *
   `;
 
-  const params = [cartId, customerName, customerCard, customerAddress];
+  const params = [cartId, customerCard, customerName, customerAddress];
 
   return db.query(sql, params)
     .then(result => {
+      const session = req.session;
+      delete session.cartId;
       const order = result.rows[0];
-      delete req.session.cartId;
       res.status(201).json(order);
     });
 

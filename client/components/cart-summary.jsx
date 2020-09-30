@@ -7,15 +7,17 @@ const CartSummary = props => {
     props.onClick('catalog', {});
   };
 
-  const listItems = props.cart.map(item =>
+  const listItems = props.cart.map((item, index) =>
     <CartSummaryItem
       name={item.name}
       price={item.price}
       image={item.image}
       shortDescription={item.shortDescription}
-      key={item.productId}
+      key={index}
     />
   );
+
+  const handleCheckout = () => props.onClick('checkout', {});
 
   const getAverage = props => {
     const price = props.cart.filter(item => item.price);
@@ -35,7 +37,10 @@ const CartSummary = props => {
       <div>
         {!props.cart ? { emptyCart } : listItems}
       </div>
-      <h3 className="ml-5 mt-5">{`Item Total:${getAverage(props)}`}</h3>
+      <div className="row d-flex justify-content-between">
+        <h3 className="ml-5 mt-3">{`Item Total:${getAverage(props)}`}</h3>
+        <button className="btn btn-primary checkout-button" onClick={handleCheckout}>Checkout</button>
+      </div>
     </>
   );
 };
