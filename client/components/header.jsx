@@ -19,13 +19,13 @@ export default class Header extends React.Component {
   render() {
     return (
       <header className="row navbar header d-flex justify-content-between">
-        <nav className="container p-2 ml-2">
-          <div className="row align-items-center d-flex header-text cursor">
+        <nav className="container p-1">
+          <div className="row align-items-center ml-1 d-flex header-text cursor">
             <i className="fas fa-mug-hot fa-md" onClick={this.returnHome}></i>
             <h6 className="m-0" onClick={this.returnHome}>The Grind</h6>
           </div>
           <div>
-            <i className="fas fa-shopping-cart shopping-cart fa-lg cursor" onClick={this.handleClick}></i>
+            <i className="fas fa-shopping-cart shopping-cart fa-lg cursor m-0" onClick={this.handleClick}></i>
             ({`${this.props.cartItemCount})`}
           </div>
         </nav>

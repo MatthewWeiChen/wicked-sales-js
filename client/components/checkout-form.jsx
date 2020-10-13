@@ -48,7 +48,7 @@ export default class CheckoutForm extends React.Component {
           <h2 className="mt-4">My Cart</h2>
         </div>
         <div className="row d-flex justify-content-center">
-          <h4 className="mt-4 price-color">{`Order Total:${average}`}</h4>
+          <h4 className="mt-4 price-color">{`Order Total:$${average}`}</h4>
         </div>
         <div className="row d-flex justify-content-center">
           <div className="col">
@@ -89,10 +89,10 @@ export default class CheckoutForm extends React.Component {
               </div>
               <div className="row justify-content-between">
                 <div onClick={this.handleClick}
-                  className="price-color cursor mt-5">
+                  className="price-color cursor mt-4">
                   {'< Continue Shopping'}
                 </div>
-                <button className="btn btn-primary mt-5" type="submit">Place Order</button>
+                <button className="btn btn-primary mt-4" type="submit" value="Place Order">Place Order</button>
               </div>
             </form>
           </div>
