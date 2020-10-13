@@ -34,22 +34,19 @@ export default class ProductDetails extends React.Component {
           <div className="row">
             <div className="col-4 mt-3">
               <div onClick={this.handleClick}
-                className="price-color cursor">
+                className="pb-5 price-color cursor">
                 {'< Back to Catalog'}
               </div>
-              <img className="img-size mt-2" src={product.image} alt={product.name} />
+              <img className="product-img mt-2 pb-3 mr-3" src={product.image} alt={product.name} />
             </div>
-            <div className="col-7 mt-3">
+            <div className="col-7 ml-5 mt-5">
               <h2>{product.name}</h2>
               <div className="price-color">{'$' + (product.price / 100).toFixed(2)}</div>
               <hr></hr>
               <p>{product.shortDescription}</p>
-              <button className="btn btn-primary" onClick={this.handleAddClick}>Add to Cart</button>
+              <p className="paragraph-spacing">{product.longDescription}</p>
+              <button className="btn btn-primary mt-3" onClick={this.handleAddClick}>Add to Cart</button>
             </div>
-          </div>
-          <div className="row">
-            <hr></hr>
-            <p className="paragraph-spacing">{product.longDescription}</p>
           </div>
         </div >
       );
