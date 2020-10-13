@@ -28,20 +28,22 @@ const CartSummary = props => {
   const emptyCart = () => <h4 className="empty-cart">Your shopping cart is empty</h4>;
 
   return (
-    <>
+    <div className="container">
       <div onClick={handleClick}
-        className="price-color cursor mt-3 ml-3">
+        className="price-color row cursor mt-3 ml-3">
         {'< Back to Catalog'}
       </div>
-      <h2 className="ml-5 mt-2">My Cart</h2>
-      <div>
-        {!props.cart ? { emptyCart } : listItems}
+      <div className="row">
+        <h2 className="ml-5 mt-2">My Cart</h2>
       </div>
-      <div className="row d-flex justify-content-between">
-        <h3 className="ml-5 mt-3">{`Item Total:${getAverage(props)}`}</h3>
-        <button className="btn btn-primary checkout-button" onClick={handleCheckout}>Checkout</button>
+      {!props.cart ? { emptyCart } : listItems}
+      <div className="row my-5">
+        <h4 className="col-md-6 total-price">{`Item Total:$${getAverage(props)}`}</h4>
+        <div className="col-md-6 checkout-btn">
+          <button className="btn btn-primary" onClick={handleCheckout}>Checkout</button>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

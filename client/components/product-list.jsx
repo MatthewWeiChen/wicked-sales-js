@@ -30,10 +30,10 @@ export default class ProductList extends React.Component {
   render() {
     const products = this.state.products;
     return (
-      <div className="container">
-        <div className="card-deck">
+      <div className="main container-fluid">
+        <div className="d-flex justify-content-around row row-width">
           {products.map((product, index) => (
-            <div className="col-4 short mt-5" key={index}>
+            <div className="col-lg-4 card-group col-md-5 mt-5 justify-content-center card-hover" key={index}>
               <ProductListItem
                 images={product.image}
                 text={product.shortDescription}
@@ -42,7 +42,7 @@ export default class ProductList extends React.Component {
                 id={product.productId}
                 onClick={() => this.handleClick(product.productId)} />
             </div>
-          ))};
+          ))}
         </div>
       </div>
     );
