@@ -18,16 +18,19 @@ export default class Header extends React.Component {
 
   render() {
     return (
-      <header className="header container-fluid ">
-        <div className="row justify-content-between">
-          <div className="pt-4 header-text cursor">The Grind <i className="fas fa-mug-hot fa-lg" onClick={this.returnHome}></i></div>
-          <div className="pr-5">
-            <i className="fas fa-shopping-cart shopping-cart fa-lg pt-4 cursor" onClick={this.handleClick}></i>
+      <header className="row navbar header d-flex justify-content-between">
+        <nav className="container p-2 ml-2">
+          <div className="row align-items-center d-flex header-text cursor">
+            <i className="fas fa-mug-hot fa-md" onClick={this.returnHome}></i>
+            <h6 className="m-0" onClick={this.returnHome}>The Grind</h6>
+          </div>
+          <div>
+            <i className="fas fa-shopping-cart shopping-cart fa-lg cursor" onClick={this.handleClick}></i>
             ({`${this.props.cartItemCount})`}
           </div>
-
-        </div>
+        </nav>
       </header>
+
     );
   }
 }

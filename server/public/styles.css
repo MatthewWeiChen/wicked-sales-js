@@ -5,7 +5,6 @@ body{
 .header{
   background-color: #baae97;
   color:white;
-  height: 70px;
 }
 
 .price-color{
@@ -19,15 +18,11 @@ body{
 }
 
 .product-img{
-  width: 400px;
-  height:400px;
-  object-fit: contain;
-  margin-left: auto;
-  margin-right: auto;
+  width:100%;
+
 }
 
 .header-text{
-  margin-left: 100px;
   font-family: 'Sofia', cursive;
   font-size: 25px;
 }
@@ -53,16 +48,9 @@ body{
   resize:none;
 }
 
-.checkout-button{
-  width: 120px;
-  margin-right: 60px;
-}
-
 .card-hover{
   border-radius: 4px;
-  background: #fff;
-  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s;
 }
 
 .card-hover:hover{
@@ -78,4 +66,40 @@ body{
 
 .row-width{
   max-width: 80%;
+}
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.checkout-btn{
+  display:flex;
+  justify-content: flex-end;
+}
+
+.add-to-cart{
+  display:flex;
+  justify-content: flex-end;
+}
+
+@media screen and (max-width:760px){
+.total-price{
+  text-align:center;
+}
+.checkout-btn{
+  display:flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.add-to-cart{
+  display:flex;
+  justify-content:center;
+}
 }

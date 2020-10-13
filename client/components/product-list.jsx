@@ -30,7 +30,7 @@ export default class ProductList extends React.Component {
   render() {
     const products = this.state.products;
     return (
-      <div className="main">
+      <div className="main container-fluid">
         <div className="d-flex justify-content-around row row-width">
           {products.map((product, index) => (
             <div className="col-lg-4 card-group col-md-5 mt-5 justify-content-center card-hover" key={index}>
@@ -42,7 +42,7 @@ export default class ProductList extends React.Component {
                 id={product.productId}
                 onClick={() => this.handleClick(product.productId)} />
             </div>
-          ))};
+          ))}
         </div>
       </div>
     );

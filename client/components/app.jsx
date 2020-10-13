@@ -4,6 +4,7 @@ import ProductDetails from './product-details';
 import ProductList from './product-list';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
+import Modal from './modal';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,12 +15,14 @@ export default class App extends React.Component {
         name: 'catalog',
         params: {}
       },
-      open: false
+      open: true
     };
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
+    this.modalDisclaimer = this.modalDisclaimer.bind(this);
+    this.changeModal = this.changeModal.bind(this);
   }
 
   setView(name, params) {
@@ -29,6 +32,14 @@ export default class App extends React.Component {
         params: params
       }
     });
+  }
+
+  modalDisclaimer() {
+    if (this.state.open) return 'show d-block';
+  }
+
+  changeModal() {
+    this.setState({ open: false });
   }
 
   componentDidMount() {
@@ -89,11 +100,13 @@ export default class App extends React.Component {
   }
 
   render() {
+    const modal = this.modalDisclaimer();
     return (
-      <>
+      <div className="container-fluid">
         <Header cartItemCount={this.state.cart.length} setView={this.setView} />
+        <Modal modalSwitch={modal} changeModal={this.changeModal} />
         { this.renderSwitch(this.state.view.name)}
-      </>
+      </div>
     );
   }
 }
