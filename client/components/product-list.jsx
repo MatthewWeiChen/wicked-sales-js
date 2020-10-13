@@ -33,7 +33,7 @@ export default class ProductList extends React.Component {
       <div className="main">
         <div className="d-flex justify-content-around row row-width">
           {products.map((product, index) => (
-            <div className="col-lg-4 card-group col-md-5 mt-5 justify-content-center" key={index}>
+            <div className="col-lg-4 card-group col-md-5 mt-5 justify-content-center card-hover" key={index}>
               <ProductListItem
                 images={product.image}
                 text={product.shortDescription}

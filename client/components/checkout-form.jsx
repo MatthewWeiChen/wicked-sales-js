@@ -44,6 +44,8 @@ export default class CheckoutForm extends React.Component {
     return (
       <div className="container">
         <div className="row d-flex justify-content-center">
+          <h2>Disclaimer: This is a demo site. No real purchases will be made. Please do not use personal information when checking out.
+          </h2>
           <h2 className="mt-4">My Cart</h2>
         </div>
         <div className="row d-flex justify-content-center">
