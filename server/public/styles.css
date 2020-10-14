@@ -64,9 +64,6 @@ body{
   align-items: center;
 }
 
-.row-width{
-  max-width: 80%;
-}
 
 .modal {
   position: fixed;
