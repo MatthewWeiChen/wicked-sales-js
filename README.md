@@ -20,3 +20,7 @@ https://thegrind.mattweichen.tech/
 * User can add an item to their cart
 * User can view their cart summary
 * User can place an order
+
+## Preview
+![Image of Preview]
+(https://gph.is/g/Zl13X7x)
