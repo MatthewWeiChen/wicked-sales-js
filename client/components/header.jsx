@@ -26,7 +26,7 @@ export default class Header extends React.Component {
           </div>
           <div>
             <i className="fas fa-shopping-cart shopping-cart fa-lg cursor m-0" onClick={this.handleClick}></i>
-            ({`${this.props.cartItemCount})`}
+            <span className="cursor" onClick={this.handleClick}>({`${this.props.cartItemCount})`}</span>
           </div>
         </nav>
       </header>

@@ -25,7 +25,7 @@ const CartSummary = props => {
     return (average / 100).toFixed(2);
   };
 
-  const emptyCart = () => <h4 className="empty-cart">Your shopping cart is empty</h4>;
+  const emptyCart = <h4 className="empty-cart mt-3">Your shopping cart is empty</h4>;
 
   return (
     <div className="container">
@@ -36,7 +36,7 @@ const CartSummary = props => {
       <div className="row">
         <h2 className="ml-5 mt-2">My Cart</h2>
       </div>
-      {!props.cart ? { emptyCart } : listItems}
+      {props.cart.length === 0 ? emptyCart : listItems}
       <div className="row my-5">
         <h4 className="col-md-6 total-price">{`Item Total:$${getAverage(props)}`}</h4>
         <div className="col-md-6 checkout-btn">

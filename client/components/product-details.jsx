@@ -30,7 +30,7 @@ export default class ProductDetails extends React.Component {
     const product = this.state.product;
     if (product) {
       return (
-        <div className="container details shadow-sm mt-5">
+        <div className="container details shadow-sm mb-3 mt-5">
           <div className="row">
             <div className="col-md-4 mt-3">
               <div onClick={this.handleClick}
@@ -45,7 +45,7 @@ export default class ProductDetails extends React.Component {
               <hr></hr>
               <p>{product.shortDescription}</p>
               <p className="paragraph-spacing">{product.longDescription}</p>
-              <div className="row add-to-cart mt-4">
+              <div className="row add-to-cart mt-5 mb-3">
                 <button className="btn btn-primary" onClick={this.handleAddClick}>Add to Cart</button>
               </div>
             </div>
