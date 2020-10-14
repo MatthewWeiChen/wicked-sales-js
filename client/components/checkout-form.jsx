@@ -87,7 +87,7 @@ export default class CheckoutForm extends React.Component {
                   name="shippingAddress" required>
                 </textarea>
               </div>
-              <div className="row justify-content-between">
+              <div className="row justify-content-between mb-3">
                 <div onClick={this.handleClick}
                   className="price-color cursor mt-4">
                   {'< Continue Shopping'}
