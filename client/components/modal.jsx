@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Modal(props) {
+const Modal = props => {
 
   return (
     <>
@@ -9,9 +9,6 @@ function Modal(props) {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLongTitle">Disclaimer</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
             </div>
             <div className="modal-body">
               This is a demo site. No real purchases will be made.
@@ -24,6 +21,6 @@ function Modal(props) {
       </div>
     </>
   );
-}
+};
 
 export default Modal;
